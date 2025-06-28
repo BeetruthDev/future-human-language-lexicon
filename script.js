@@ -41,20 +41,115 @@ function fillColor(){
 }
 
 // ==== GENERATE FUNCTIONS ==== //
+let wordTypes = {
+	"Noun" : "", // Nouns aren't special
+	"Verb" : "al", // Verbs end with 'al', e.g: 'Karal'
+	"Adjective" : "ev" // Adjectives end with 'ev' 'Gharev'
+}
+
+let letterMethods = [
+	['C', 'V', 'C'],
+	['V', 'C', 'V'],
+	['V', 'C'],
+	['V', 'V', 'C']
+]
+
+let consonants = [
+	"b",
+	"d",
+	"f",
+	"g",
+	"h",
+	"j",
+	"ch",
+	"k",
+	"l",
+	"m",
+	"n",
+	"p",
+	"r",
+	"s",
+	"sh",
+	"t",
+	"v",
+	"kh",
+	"gh",
+	"z",
+	"zh",
+	"th",
+	"dh"
+]
+
+let vowels = [
+	"a",
+	"ā",
+	"ə",
+	"e",
+	"i",
+	"o",
+	"u",
+	"y"
+]
+
+let wordSuffix = ""
+
+function generate() {
+	let wordLength = Math.floor(Math.random() * (maximumCharacters - minimumCharacters)) + minimumCharacters;
+	let lettersDone = 0;
+	let word = "";
+
+	while (lettersDone <= wordLength) {
+		let letterMethod = letterMethods[Math.floor(Math.random() * letterMethods.length)];
+
+		for (let letterType of letterMethod) {
+			lettersDone++;
+			if (lettersDone > wordLength)
+				break;
+
+			if (letterType === 'C') {
+				let consonant = consonants[Math.floor(Math.random() * consonants.length)];
+				word += consonant;
+			} 
+			else if (letterType === 'V') {
+				let vowel = "";
+
+				if (lettersDone === 1 && JSON.stringify(letterMethod) === JSON.stringify(['V', 'V', 'C'])) {
+					vowel = vowels[Math.floor(Math.random() * vowels.length)];
+					if (vowel === "i") 
+						vowel = "y";
+				} 
+				else {
+					// Exclude 'y'
+					vowel = vowels[Math.floor(Math.random() * (vowels.length - 1))];
+				}
+				word += vowel;
+			}
+		}
+	}
+
+	word += wordSuffix;
+	return word;
+}
+
 function generate_verb(){
-	result.innerText="Verb"
+	wordSuffix = "al"
+	result.innerText=generate()
 }
 
 function generate_adjective(){
-	result.innerText="Adjective"
+	wordSuffix = "ev"
+	result.innerText=generate()
 }
 
 function generate_noun_other(){
-	result.innerText="Noun/Other"
+	wordSuffix = ""
+	result.innerText=generate()
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+{
 	verb.addEventListener('click', generate_verb)
 	adjective.addEventListener('click', generate_adjective)
 	noun_other.addEventListener('click', generate_noun_other)
 })
+
