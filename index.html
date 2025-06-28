@@ -7,7 +7,29 @@
 	<body>
 		<h1 class="title">Future Human Word Generator</h1>
 		<div class="center">
-			
+			<div class="wrapper">
+				<div class="values">
+					<span id="range1">
+						0
+					</span>
+					<span> &dash; </span>
+					<span id="range2">
+						100
+					</span>
+				</div>
+				<div class="container">
+					<div class="slider-track"></div>
+					<input type="range" min="1" max="120" value="20" id="slider-1" oninput="slideOne()">
+					<input type="range" min="1" max="120" value="80" id="slider-2" oninput="slideTwo()">
+				</div>
+			</div>
+			<button>Verb</button>
+			<button>Adjective</button>
+			<button>Noun / Other</button>
+			<h1>Apozheshkhchthdhghev</h1>
 		</div>
+		
+		<!--Script-->
+		<script src="script.js"></script>
 	</body>
 </html>
