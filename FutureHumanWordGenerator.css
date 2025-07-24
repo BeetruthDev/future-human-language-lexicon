@@ -36,8 +36,8 @@ button:hover{
 
 @font-face {
   font-family: 'Faraubeshad';
-  src: url('Faraubeshad.woff2') format('woff2'),
-       url('Faraubeshad.woff') format('woff');
+  src: url('./Faraubeshad.woff2') format('woff2'),
+       url('./Faraubeshad.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }

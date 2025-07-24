@@ -96,7 +96,7 @@ let consonants_fbd = [
 	"p",
 	"r",
 	"s",
-	"S",
+	"\\",
 	"t",
 	"v",
 	"[",
