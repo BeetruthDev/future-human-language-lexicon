@@ -42,6 +42,20 @@ button:hover{
   font-style: normal;
 }
 
+textarea{
+  resize: none;
+  size-adjust: none !important;
+  font-size: x-large;
+  font-family: 'Faraubeshad', Arial;
+  background-color: rgb(8, 8, 8);
+  border-color: #2756e4;
+  border-radius: 0px;
+  border-width: 0px;
+  color: white;
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
 .title {
   	text-align: center;
     font-family: 'Faraubeshad';
