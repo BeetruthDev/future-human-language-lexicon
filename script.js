@@ -14,6 +14,7 @@ let verb = document.getElementById('verb')
 let adjective = document.getElementById('adjective')
 let noun_other = document.getElementById('noun/other')
 let result = document.getElementById('result')
+let result2 = document.getElementById('result2')
 
 minimumCharacters = 0
 maximumCharacters = 0
@@ -80,6 +81,32 @@ let consonants = [
 	"dh"
 ]
 
+let consonants_fbd = [
+	"b",
+	"d",
+	"f",
+	"g",
+	"h",
+	"j",
+	"c",
+	"k",
+	"l",
+	"m",
+	"n",
+	"p",
+	"r",
+	"s",
+	"S",
+	"t",
+	"v",
+	"[",
+	"x",
+	"z",
+	"Z",
+	"T",
+	"D"
+]
+
 let vowels = [
 	"a",
 	"ā",
@@ -87,16 +114,27 @@ let vowels = [
 	"e",
 	"i",
 	"o",
-	"u",
-	"y"
+	"u"
+]
+
+let vowels_fbd = [
+	"a",
+	"A",
+	"E",
+	"e",
+	"i",
+	"o",
+	"u"
 ]
 
 let wordSuffix = ""
+let word_fbd = ""
 
 function generate() {
 	let wordLength = Math.floor(Math.random() * (maximumCharacters - minimumCharacters)) + minimumCharacters;
 	let lettersDone = 0;
 	let word = "";
+	word_fbd = "";
 
 	while (lettersDone <= wordLength) {
 		let letterMethod = letterMethods[Math.floor(Math.random() * letterMethods.length)];
@@ -107,43 +145,45 @@ function generate() {
 				break;
 
 			if (letterType === 'C') {
-				let consonant = consonants[Math.floor(Math.random() * consonants.length)];
-				word += consonant;
+				let index = Math.floor(Math.random() * consonants.length);
+				word += consonants[index];
+				word_fbd += consonants_fbd[index]
 			} 
 			else if (letterType === 'V') {
 				let vowel = "";
+				let vowel_fbd = "";
 
-				if (lettersDone === 1 && JSON.stringify(letterMethod) === JSON.stringify(['V', 'V', 'C'])) {
-					vowel = vowels[Math.floor(Math.random() * vowels.length)];
-					if (vowel === "i") 
-						vowel = "y";
-				} 
-				else {
-					// Exclude 'y'
-					vowel = vowels[Math.floor(Math.random() * (vowels.length - 1))];
-				}
+				let index = Math.floor(Math.random() * vowels.length);
+				vowel = vowels[index];
+				vowel_fbd = vowels_fbd[index]
+				
 				word += vowel;
+				word_fbd += vowel_fbd
 			}
 		}
 	}
 
 	word += wordSuffix;
+	word_fbd += wordSuffix
 	return word;
 }
 
 function generate_verb(){
 	wordSuffix = "al"
 	result.innerText=generate()
+	result2.innerText=word_fbd
 }
 
 function generate_adjective(){
 	wordSuffix = "ev"
 	result.innerText=generate()
+	result2.innerText=word_fbd
 }
 
 function generate_noun_other(){
 	wordSuffix = ""
 	result.innerText=generate()
+	result2.innerText=word_fbd
 }
 
 document.addEventListener('DOMContentLoaded', () => 
